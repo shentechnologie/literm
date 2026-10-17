@@ -8,6 +8,7 @@
  */
 import { Terminal } from '@xterm/headless';
 import { now } from './clock';
+import { CursorStyleTracker } from './cursor-style';
 import { ShadowGrid } from './shadow-grid';
 import { defaultTheme, Palette } from './theme';
 import type { FrameData, Theme, Unsubscribe } from './types';
@@ -49,6 +50,7 @@ export class TerminalSession {
   };
 
   private grid: ShadowGrid;
+  private cursorStyle: CursorStyleTracker;
   private listeners = new Set<() => void>();
   private disposables: { dispose(): void }[] = [];
   private disposed = false;
@@ -68,6 +70,12 @@ export class TerminalSession {
       cursorBlink: true,
       logLevel: 'off',
     });
+
+    // DECSCUSR is not reflected in options by the headless build; track it.
+    this.cursorStyle = new CursorStyleTracker(this.term);
+    this.cursorStyle.onChange = () => this.markDirty();
+    this.cursorStyle.attach();
+    this.grid = new ShadowGrid(cols, rows, this.palette, () => this.cursorStyle.current);
 
     // Anything that can change pixels wakes the renderer. The renderer decides
     // whether a frame is actually needed (it compares the resulting cursor and
@@ -156,6 +164,7 @@ export class TerminalSession {
     this.disposed = true;
     for (const d of this.disposables) d.dispose();
     this.disposables = [];
+    this.cursorStyle.dispose();
     this.listeners.clear();
     this.term.dispose();
   }

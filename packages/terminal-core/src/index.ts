@@ -17,6 +17,8 @@ export {
   themes,
 } from './theme';
 export { ShadowGrid } from './shadow-grid';
+export { CursorStyleTracker } from './cursor-style';
+export type { CursorStyleState } from './cursor-style';
 export { TerminalSession } from './session';
 export type { SessionStats, TerminalSessionOptions } from './session';
 export { activeBuffer, cellFlags, isAscii } from './buffer';

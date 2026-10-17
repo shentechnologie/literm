@@ -24,6 +24,7 @@ import {
 } from './buffer';
 import { now } from './clock';
 import type { Palette } from './theme';
+import type { CursorStyleState } from './cursor-style';
 import {
   FLAG,
   type CellRun,
@@ -54,6 +55,7 @@ export class ShadowGrid {
 
   private palette: Palette;
   private slots: Slot[];
+  private cursorStyle: (() => CursorStyleState) | undefined;
 
   /** Per-cell shadow state, indexed `slot * cols + x`. */
   private prevCode: Int32Array;
@@ -71,10 +73,16 @@ export class ShadowGrid {
   /** Scratch cell reused for every getCell call. */
   private cell: XCell | null = null;
 
-  constructor(cols: number, rows: number, palette: Palette) {
+  constructor(
+    cols: number,
+    rows: number,
+    palette: Palette,
+    cursorStyle?: () => CursorStyleState,
+  ) {
     this.cols = cols;
     this.rows = rows;
     this.palette = palette;
+    this.cursorStyle = cursorStyle;
     this.slots = new Array<Slot>(rows);
     for (let i = 0; i < rows; i++) this.slots[i] = { y: -1, snap: EMPTY_ROW };
     this.prevCode = new Int32Array(cols * rows);
@@ -328,8 +336,12 @@ export class ShadowGrid {
     const absY = buf.baseY + buf.cursorY;
     const screenY = absY - viewportY;
     const visible = screenY >= 0 && screenY < this.rows;
-    const style = (term.options.cursorStyle ?? 'block') as CursorStyle;
-    const blink = term.options.cursorBlink !== false;
+    const shape = this.cursorStyle?.() ?? {
+      style: (term.options.cursorStyle ?? 'block') as CursorStyle,
+      blink: term.options.cursorBlink !== false,
+    };
+    const style = shape.style;
+    const blink = shape.blink;
     const x = buf.cursorX;
     let hash = 0x811c9dc5;
     hash = mix(hash, x);
