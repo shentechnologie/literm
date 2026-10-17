@@ -87,12 +87,12 @@ describe('DECSCUSR (cursor shape)', () => {
 describe('OSC sequences', () => {
   test('title changes are observable', async () => {
     const { term, write } = make();
-    let title: string | null = null;
+    const seen: { title: string | null } = { title: null };
     const sub = term.onTitleChange((value) => {
-      title = value;
+      seen.title = value;
     });
     await write('\x1b]0;~/dev/thing\x07');
-    expect(title).toBe('~/dev/thing');
+    expect(seen.title).toBe('~/dev/thing');
     sub.dispose();
   });
 

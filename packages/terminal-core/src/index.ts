@@ -1,3 +1,7 @@
+// Side-effect import first: xterm's platform detection needs navigator shims
+// before the parser module is evaluated (see platform-shim.ts).
+import './platform-shim';
+
 export { FLAG } from './types';
 export type {
   CellRun,

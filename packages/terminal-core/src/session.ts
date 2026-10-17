@@ -6,6 +6,9 @@
  * echo. In P1 the session gains a `Transport` and `inject()` becomes
  * `transport.write()`; the render path stays identical.
  */
+// MUST be imported before @xterm/headless: xterm's platform detection throws
+// under Hermes when navigator.userAgent is missing. See platform-shim.ts.
+import './platform-shim';
 import { Terminal } from '@xterm/headless';
 import { now } from './clock';
 import { CursorStyleTracker } from './cursor-style';
