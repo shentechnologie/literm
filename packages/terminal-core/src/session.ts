@@ -99,13 +99,14 @@ export class TerminalSession {
   }
 
   /** Feed bytes from the transport into the parser. */
-  write(data: string | Uint8Array): void {
+  write(data: string | Uint8Array, onParsed?: () => void): void {
     const t0 = now();
     const bytes = typeof data === 'string' ? data.length : data.byteLength;
     this.stats.bytesWritten += bytes;
     this.term.write(data, () => {
       this.stats.writes++;
       this.markDirty();
+      onParsed?.();
     });
     // Only the synchronous slice is measured here: xterm's WriteBuffer parses
     // in batches and defers the rest to timers, and that deferred work is what
