@@ -1,12 +1,14 @@
 {
-  "name": "@shenterm/terminal-core",
+  "name": "@literm/terminal-core",
   "version": "0.0.0",
   "private": true,
+  "description": "Headless terminal core: xterm parser wrapper, shadow-grid diff, palette, key encoder, and the transport/drain contract for SSH shells.",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
     "test": "bun test",
-    "bench": "bun run bench/flood.ts"
+    "bench": "bun run bench/flood.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@xterm/headless": "6.0.0"

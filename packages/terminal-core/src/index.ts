@@ -30,3 +30,13 @@ export type { XBuffer, XCell, XLine } from './buffer';
 export { encodeKey, encodePaste } from './keys';
 export type { KeyEvent } from './keys';
 export { now } from './clock';
+
+// --- transport contract + SSH bridge ----------------------------------------
+// Pure JS, no native module: the contract the platform layer implements, the
+// backpressured drain loop that binds a channel to a terminal, and a mock
+// channel for tests/labs.
+export * from './ssh-types';
+export { SshSession, attachShell } from './ssh-session';
+export type { SshSessionOptions, SshSessionStats, TerminalSink } from './ssh-session';
+export { MockShellChannel } from './mock-channel';
+export type { MockShellOptions } from './mock-channel';

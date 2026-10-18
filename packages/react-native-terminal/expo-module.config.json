@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android"],
+  "apple": {
+    "modules": ["SecureShellModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.secureshell.SecureShellModule"]
+  }
+}

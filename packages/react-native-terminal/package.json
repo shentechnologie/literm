@@ -1,0 +1,27 @@
+{
+  "name": "@literm/react-native-terminal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "React Native SSH terminal: the native secure-shell module, the Skia terminal view, and the terminal pane (key bar + input).",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "vendor": "scripts/vendor-ssh.sh"
+  },
+  "dependencies": {
+    "@literm/terminal-core": "workspace:*"
+  },
+  "peerDependencies": {
+    "@shopify/react-native-skia": "*",
+    "expo": "*",
+    "react": "*",
+    "react-native": "*",
+    "react-native-safe-area-context": "*"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.14",
+    "@types/react": "~19.3.0"
+  }
+}
