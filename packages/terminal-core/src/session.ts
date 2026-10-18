@@ -9,7 +9,7 @@
 // MUST be imported before @xterm/headless: xterm's platform detection throws
 // under Hermes when navigator.userAgent is missing. See platform-shim.ts.
 import './platform-shim';
-import { Terminal } from '@xterm/headless';
+import { Terminal } from './xterm';
 import { now } from './clock';
 import { CursorStyleTracker } from './cursor-style';
 import { ShadowGrid } from './shadow-grid';

@@ -1,0 +1,4 @@
+# Hoisted node_modules (the classic layout React Native/Metro expects) and a
+# single copy of react / react-native across the workspace.
+[install]
+linker = "hoisted"

@@ -1,0 +1,25 @@
+{
+  "name": "literm",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A terminal for React Native: a headless VT core, a Skia terminal view/pane, and a native SSH secure shell.",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "bun run --filter '*' build",
+    "typecheck": "bun run --filter '*' typecheck",
+    "test": "bun run --filter '*' test",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "bun run build && changeset publish",
+    "ssh-server": "bun run tools/ssh-test-server/server.ts",
+    "ssh-smoke": "bun run tools/ssh-test-server/smoke.ts"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.7",
+    "@types/bun": "^1.3.14",
+    "react-native-builder-bob": "^0.40.13",
+    "typescript": "~6.0.3"
+  }
+}
