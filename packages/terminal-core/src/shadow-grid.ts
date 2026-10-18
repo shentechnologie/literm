@@ -73,12 +73,7 @@ export class ShadowGrid {
   /** Scratch cell reused for every getCell call. */
   private cell: XCell | null = null;
 
-  constructor(
-    cols: number,
-    rows: number,
-    palette: Palette,
-    cursorStyle?: () => CursorStyleState,
-  ) {
+  constructor(cols: number, rows: number, palette: Palette, cursorStyle?: () => CursorStyleState) {
     this.cols = cols;
     this.rows = rows;
     this.palette = palette;
@@ -295,11 +290,7 @@ export class ShadowGrid {
             xx++;
             continue;
           }
-          if (
-            this.prevFlags[ii] !== flags ||
-            this.prevFg[ii] !== fg ||
-            this.prevBg[ii] !== bg
-          ) {
+          if (this.prevFlags[ii] !== flags || this.prevFg[ii] !== fg || this.prevBg[ii] !== bg) {
             break;
           }
           const c = line && xx < length ? line.getCell(xx, cell) : undefined;

@@ -1,0 +1,8 @@
+node_modules
+**/lib
+**/dist
+**/build
+**/vendor
+**/android
+bun.lock
+*.md

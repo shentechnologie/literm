@@ -43,7 +43,10 @@ if (parsed instanceof Error) {
   console.error('could not parse host key:', parsed.message);
   process.exit(1);
 }
-const fingerprint = createHash('sha256').update(parsed.getPublicSSH()).digest('base64').replace(/=+$/, '');
+const fingerprint = createHash('sha256')
+  .update(parsed.getPublicSSH())
+  .digest('base64')
+  .replace(/=+$/, '');
 
 const server = new Server({ hostKeys: [hostKey] }, (client) => {
   client.on('authentication', (ctx) => {
@@ -74,7 +77,9 @@ const server = new Server({ hostKeys: [hostKey] }, (client) => {
         const stream = acceptShell();
         let line = '';
         const prompt = () => stream.write('\r\n$ ');
-        stream.write(`shenterm ssh test server  ${size.cols}x${size.rows}\r\nSHA256:${fingerprint}\r\n$ `);
+        stream.write(
+          `shenterm ssh test server  ${size.cols}x${size.rows}\r\nSHA256:${fingerprint}\r\n$ `,
+        );
 
         stream.on('data', (data: Buffer) => {
           for (const char of data.toString('utf8')) {

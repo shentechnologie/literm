@@ -72,9 +72,9 @@ describe('connect: host key staging', () => {
 
   test('declining the key rejects and never authenticates', async () => {
     const native = new MockNativeSecureShellBinding();
-    await expect(
-      connect({ ...password(), verifyHostKey: () => false }, native),
-    ).rejects.toThrow(/host key .* rejected/);
+    await expect(connect({ ...password(), verifyHostKey: () => false }, native)).rejects.toThrow(
+      /host key .* rejected/,
+    );
     expect(native.hostKeyResponses[0]?.accept).toBe(false);
     expect(native.hasSession(native.hostKeyResponses[0]!.sessionId)).toBe(false);
   });

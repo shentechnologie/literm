@@ -23,6 +23,4 @@ const shapes = xterm as unknown as {
 };
 
 export const Terminal: typeof xterm.Terminal =
-  shapes.Terminal ??
-  shapes.default?.Terminal ??
-  (undefined as unknown as typeof xterm.Terminal);
+  shapes.Terminal ?? shapes.default?.Terminal ?? (undefined as unknown as typeof xterm.Terminal);

@@ -12,11 +12,7 @@
  *  - Anything else (CJK, emoji, symbols outside the font) goes through the
  *    paragraph API, which resolves font fallback via the typeface provider.
  */
-import {
-  Skia,
-  TextAlign,
-  type SkCanvas,
-} from '@shopify/react-native-skia';
+import { Skia, TextAlign, type SkCanvas } from '@shopify/react-native-skia';
 import { FLAG, type CellRun, type CursorState, type RowSnapshot } from '@literm/terminal-core';
 import { safeDispose } from './dispose';
 import type { PaintResources } from './font';
@@ -128,10 +124,18 @@ export function paintCursor(
   const y = cursor.y * cellHeight;
   res.cursorPaint.setColor(res.colorOf(theme.cursor));
   if (cursor.style === 'bar') {
-    canvas.drawRect(Skia.XYWHRect(x, y, Math.max(1.5, cellWidth * 0.14), cellHeight), res.cursorPaint);
+    canvas.drawRect(
+      Skia.XYWHRect(x, y, Math.max(1.5, cellWidth * 0.14), cellHeight),
+      res.cursorPaint,
+    );
   } else if (cursor.style === 'underline') {
     canvas.drawRect(
-      Skia.XYWHRect(x, y + cellHeight - Math.max(2, cellHeight * 0.12), cellWidth, Math.max(2, cellHeight * 0.12)),
+      Skia.XYWHRect(
+        x,
+        y + cellHeight - Math.max(2, cellHeight * 0.12),
+        cellWidth,
+        Math.max(2, cellHeight * 0.12),
+      ),
       res.cursorPaint,
     );
   } else {

@@ -67,7 +67,13 @@ export interface KeyBarProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export function KeyBar({ items, onKey, contentInset, theme = defaultKeyBarTheme, style }: KeyBarProps) {
+export function KeyBar({
+  items,
+  onKey,
+  contentInset,
+  theme = defaultKeyBarTheme,
+  style,
+}: KeyBarProps) {
   // The bar sits on the bottom edge, so it clears the home indicator and the
   // soft keyboard itself rather than making every caller do it.
   const bottomInset = useKeyboardBottomInset();
@@ -109,10 +115,18 @@ function renderItem(
     case 'divider':
       return <View key={index} style={[styles.divider, { backgroundColor: theme.border }]} />;
     case 'key':
-      return <KeyButton key={index} label={item.label} theme={theme} onPress={() => onKey(item.event)} />;
+      return (
+        <KeyButton key={index} label={item.label} theme={theme} onPress={() => onKey(item.event)} />
+      );
     case 'toggle':
       return (
-        <KeyButton key={index} label={item.label} theme={theme} active={item.active} onPress={item.onToggle} />
+        <KeyButton
+          key={index}
+          label={item.label}
+          theme={theme}
+          active={item.active}
+          onPress={item.onToggle}
+        />
       );
     case 'action':
       return (

@@ -61,9 +61,9 @@ describe('SecureShellTransport', () => {
   test('declining the key rejects', async () => {
     const native = new MockNativeSecureShellBinding();
     const transport = new SecureShellTransport(native);
-    await expect(
-      transport.connect({ ...password(), verifyHostKey: () => false }),
-    ).rejects.toThrow(/rejected/);
+    await expect(transport.connect({ ...password(), verifyHostKey: () => false })).rejects.toThrow(
+      /rejected/,
+    );
     expect(transport.isConnected).toBe(false);
     transport.dispose();
   });
@@ -82,9 +82,9 @@ describe('SecureShellTransport', () => {
   test('unsupported auth is rejected before touching the native side', async () => {
     const native = new MockNativeSecureShellBinding();
     const transport = new SecureShellTransport(native);
-    await expect(
-      transport.connect({ ...password(), auth: { type: 'agent' } }),
-    ).rejects.toThrow(/not implemented/);
+    await expect(transport.connect({ ...password(), auth: { type: 'agent' } })).rejects.toThrow(
+      /not implemented/,
+    );
     expect(native.hostKeyResponses.length).toBe(0);
     transport.dispose();
   });

@@ -93,10 +93,7 @@ export function makeResources(options: MakeResourcesOptions): PaintResources {
   const metrics = fonts.regular.getMetrics();
   const natural = metrics.descent - metrics.ascent + (metrics.leading ?? 0);
   const cellWidth = advance;
-  const cellHeight = Math.max(
-    Math.ceil(natural * lineHeightFactor),
-    Math.ceil(cellWidth * 1.25),
-  );
+  const cellHeight = Math.max(Math.ceil(natural * lineHeightFactor), Math.ceil(cellWidth * 1.25));
   const baseline = -metrics.ascent + (cellHeight - natural) / 2;
 
   const colorCache = new Map<number, SkColor>();

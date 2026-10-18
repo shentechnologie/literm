@@ -16,14 +16,15 @@
  *    disposed on eviction; that boundary is where the memory churn lives.
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Canvas, Picture, Skia, useFonts, type SkPicture } from '@shopify/react-native-skia';
 import {
-  Canvas,
-  Picture,
-  Skia,
-  useFonts,
-  type SkPicture,
-} from '@shopify/react-native-skia';
-import { StyleSheet, PanResponder, View, type LayoutChangeEvent, type StyleProp, type ViewStyle } from 'react-native';
+  StyleSheet,
+  PanResponder,
+  View,
+  type LayoutChangeEvent,
+  type StyleProp,
+  type ViewStyle,
+} from 'react-native';
 import {
   defaultTheme,
   TerminalSession,
@@ -339,7 +340,9 @@ export function TerminalView({
   // View wrapper and let the canvas fill it.
   const onLayout = useCallback((event: LayoutChangeEvent) => {
     const { width, height } = event.nativeEvent.layout;
-    setLayout((prev) => (prev.width === width && prev.height === height ? prev : { width, height }));
+    setLayout((prev) =>
+      prev.width === width && prev.height === height ? prev : { width, height },
+    );
   }, []);
 
   // Touch surface: vertical drag scrolls the viewport a row at a time (content

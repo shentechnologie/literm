@@ -114,9 +114,18 @@ export interface NativeSecureShellBinding {
   close(sessionId: string): void;
   disconnect(sessionId: string): void;
 
-  addListener(event: 'onDataAvailable', listener: (event: NativeDataEvent) => void): NativeSubscription;
+  addListener(
+    event: 'onDataAvailable',
+    listener: (event: NativeDataEvent) => void,
+  ): NativeSubscription;
   addListener(event: 'onClose', listener: (event: NativeCloseEvent) => void): NativeSubscription;
-  addListener(event: 'onHostKey', listener: (event: NativeHostKeyEvent) => void): NativeSubscription;
-  addListener(event: 'onConnected', listener: (event: NativeConnectedEvent) => void): NativeSubscription;
+  addListener(
+    event: 'onHostKey',
+    listener: (event: NativeHostKeyEvent) => void,
+  ): NativeSubscription;
+  addListener(
+    event: 'onConnected',
+    listener: (event: NativeConnectedEvent) => void,
+  ): NativeSubscription;
   addListener(event: 'onError', listener: (event: NativeErrorEvent) => void): NativeSubscription;
 }

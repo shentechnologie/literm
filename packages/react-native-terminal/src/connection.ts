@@ -8,7 +8,12 @@
  */
 import { getSecureShell } from './native';
 import { SecureShellChannel } from './channel';
-import type { CloseReason, ShellChannel, ShellOpenOptions, Unsubscribe } from '@literm/terminal-core';
+import type {
+  CloseReason,
+  ShellChannel,
+  ShellOpenOptions,
+  Unsubscribe,
+} from '@literm/terminal-core';
 import type {
   ConnectOptions,
   NativeConnectedEvent,
@@ -143,7 +148,7 @@ export async function connect(
                 knownHostsLine: event.knownHostsLine,
               });
             } catch {
-              accept = false;
+              // A throwing verifier is a rejection; `accept` stays false.
             }
             if (!accept) {
               // Settle before responding so a native error event (emitted

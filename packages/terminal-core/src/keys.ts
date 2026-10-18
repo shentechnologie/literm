@@ -150,8 +150,10 @@ export function encodeKey(ev: KeyEvent, modes: IModes): string | null {
 export function encodePaste(text: string, modes: IModes): string {
   if (modes.bracketedPasteMode) {
     // ESC inside a bracketed paste would terminate it early.
+    // eslint-disable-next-line no-control-regex -- ESC is the point
     const safe = text.replace(/\x1b/g, '');
     return `\x1b[200~${safe}\x1b[201~`;
   }
+  // eslint-disable-next-line no-control-regex -- ESC is the point
   return text.replace(/\x1b/g, '').replace(/\r?\n/g, '\r');
 }

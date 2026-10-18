@@ -28,9 +28,7 @@ export interface HostKeyFingerprint {
  * aborts the connection. There is deliberately no "skip verification" option:
  * the host key is a hard gate, not a setting.
  */
-export type HostKeyVerifier = (
-  fingerprint: HostKeyFingerprint,
-) => boolean | Promise<boolean>;
+export type HostKeyVerifier = (fingerprint: HostKeyFingerprint) => boolean | Promise<boolean>;
 
 export type SshAuth =
   | { type: 'password'; password: string }
@@ -85,9 +83,7 @@ export interface ShellChannel {
 }
 
 export type CloseReason =
-  | { type: 'eof'; exitCode?: number }
-  | { type: 'closed' }
-  | { type: 'error'; message: string };
+  { type: 'eof'; exitCode?: number } | { type: 'closed' } | { type: 'error'; message: string };
 
 export interface SshTransport {
   /** TCP connect + SSH handshake + host-key verification + authentication. */
