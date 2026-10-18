@@ -1,7 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "types": ["bun"]
+    "types": ["bun"],
+    "paths": {
+      "@literm/terminal-core": ["../terminal-core/src/index.ts"]
+    }
   },
   "include": ["src", "test"]
 }
