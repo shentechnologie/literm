@@ -5,9 +5,9 @@ Pod::Spec.new do |s|
   s.description    = 'Connections with a staged host-key gate, password and private-key auth, and interactive shells. Bundles libssh2 + mbedTLS.'
   s.license        = { :type => 'MIT', :file => '../LICENSE' }
   s.author         = 'Shenterm'
-  s.homepage       = 'https://github.com/shenterm/shenterm'
+  s.homepage       = 'https://github.com/shentechnologie/literm'
   s.platforms      = { :ios => '15.1', :tvos => '15.1' }
-  s.source         = { :git => 'https://github.com/shenterm/shenterm.git' }
+  s.source         = { :git => 'https://github.com/shentechnologie/literm.git' }
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'

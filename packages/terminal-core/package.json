@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "description": "Headless terminal core: xterm parser wrapper, shadow-grid diff, palette, key encoder, and the transport/drain contract for SSH shells.",
   "license": "MIT",
-  "homepage": "https://github.com/literm/literm/tree/main/packages/terminal-core#readme",
+  "homepage": "https://github.com/shentechnologie/literm/tree/main/packages/terminal-core#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/literm/literm.git",
+    "url": "git+https://github.com/shentechnologie/literm.git",
     "directory": "packages/terminal-core"
   },
   "bugs": {
-    "url": "https://github.com/literm/literm/issues"
+    "url": "https://github.com/shentechnologie/literm/issues"
   },
   "keywords": [
     "terminal",
