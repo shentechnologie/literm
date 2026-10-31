@@ -40,6 +40,8 @@ release/0.1:     ● cut from the 0.1.0 tag ── 0.1.1 (latest until 0.2.0 shi
 - **Immutable** means the branch is never deleted, force-pushed or rebased.
   Content changes only through stabilization fixes, version/changelog commits
   and cherry-picks. Never merge `main` into a release branch.
+- Not sure which branch a change belongs on? Use
+  [branch-model.md](branch-model.md).
 
 ## Rules
 
@@ -59,6 +61,7 @@ release/0.1:     ● cut from the 0.1.0 tag ── 0.1.1 (latest until 0.2.0 shi
 
 | Doc | Owns |
 |---|---|
+| [branch-model.md](branch-model.md) | Permanent rule for which branch a change goes on |
 | [verify.md](verify.md) | Pre-release artifact gate and native proof |
 | [bootstrap.md](bootstrap.md) | First publish of a package (one-time per package) |
 | [stable.md](stable.md) | Stable release from `main` |

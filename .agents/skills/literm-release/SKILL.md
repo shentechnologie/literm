@@ -14,6 +14,7 @@ Load `docs/release/README.md` first, then exactly one runbook.
 
 | Task | Runbook |
 |---|---|
+| Decide which branch a change goes on | `docs/release/branch-model.md` |
 | First-ever publish of a package | `docs/release/bootstrap.md` |
 | Stable release from `main` | `docs/release/stable.md` |
 | Cut or advance `release/X.Y` (alpha/beta/rc/stable) | `docs/release/prerelease.md` |
@@ -26,6 +27,9 @@ Every publish runs `docs/release/verify.md` first.
 ## Non-negotiables
 
 - Run `bun run release:verify`; never publish from a dirty tree.
+- Use `docs/release/branch-model.md` to choose the base branch. A change needed
+  for the in-flight stable goes on `release/X.Y`; a change for the next line goes
+  on `main`.
 - `main` never has `.changeset/pre.json`; prereleases live only on
   `release/X.Y`.
 - Never merge `main` into `release/**`; cherry-pick fixes.
