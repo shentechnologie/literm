@@ -74,6 +74,7 @@ release/0.1:     ● cut from the 0.1.0 tag ── 0.1.1 (latest until 0.2.0 shi
 | [verify.md](verify.md) | Pre-release artifact gate and native proof |
 | [bootstrap.md](bootstrap.md) | First publish of a package (one-time per package) |
 | [first-alpha-0.1.0.md](first-alpha-0.1.0.md) | One-time runbook for the first 0.1 alpha; delete after 0.1.0 is stable |
+| [0.1.0-release-checklist.md](0.1.0-release-checklist.md) | Current state: alpha.1 → beta → rc → stable → app migration |
 | [stable.md](stable.md) | Stable release from `main` |
 | [prerelease.md](prerelease.md) | `release/X.Y` cut, alpha/beta/rc, exit, merge-back |
 | [hotfix.md](hotfix.md) | Patch the current or an older supported line |
