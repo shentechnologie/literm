@@ -45,4 +45,8 @@ jobs:
           version: bun run version
           publish: ${{ github.event.inputs.dist_tag && format('bun run release -- --tag {0}', github.event.inputs.dist_tag) || 'bun run release' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Optional: add a fine-grained PAT named RELEASE_TOKEN (Contents +
+          # Pull requests read/write on this repo) to author Version Packages
+          # PRs as a human and let their CI run without the bot-approval gate.
+          # Without it, the action falls back to the workflow token.
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}

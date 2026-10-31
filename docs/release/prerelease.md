@@ -39,8 +39,10 @@ git commit -m "chore: enter alpha prerelease"
 git push
 ```
 
-The release workflow opens a Version Packages PR against `release/0.2`. Merge it
-to publish `0.2.0-alpha.0` with the `alpha` dist-tag.
+The release workflow opens a Version Packages PR against `release/0.2`. If its
+CI is `action_required`, approve the run or use the `RELEASE_TOKEN` setup in
+[README.md](README.md#version-packages-pr-author). Merge the PR to publish
+`0.2.0-alpha.0` with the `alpha` dist-tag.
 
 If this is the package's **first ever publish**, follow
 [bootstrap.md](bootstrap.md) instead of letting CI publish; OIDC cannot create a

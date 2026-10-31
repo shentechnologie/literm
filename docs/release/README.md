@@ -53,6 +53,24 @@ release/0.1:     ● cut from the 0.1.0 tag ── 0.1.1 (latest until 0.2.0 shi
   branch is stabilizing a line, and clear it after the stable release is merged
   back.
 
+### Version Packages PR author
+
+`changesets/action` uses `GITHUB_TOKEN`, so the PR author is
+`github-actions[bot]`. GitHub may mark that PR's CI run `action_required` until
+a maintainer approves it.
+
+Three options:
+
+1. **Approve the run** (one click). This is the least-privilege default. The
+   gate may disappear after the bot's first merged PR.
+2. **Use a fine-grained PAT.** Create one scoped to this repository with
+   `Contents: Read and write` and `Pull requests: Read and write`, add it as the
+   `RELEASE_TOKEN` Actions secret, and the workflow will use it automatically.
+   The Version Packages PR is then authored by that user and CI runs normally.
+   Give it a short expiry and rotate it; it is a long-lived credential.
+3. **Version locally.** Run `bun changeset version`, commit, push a branch and
+   open the PR yourself. No secret, but manual.
+
 ## Rules
 
 1. Run `bun run release:verify` before every publish. A failing gate blocks the
