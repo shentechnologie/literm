@@ -9,6 +9,7 @@ GitHub releases and shenterm `STATUS.md`. Do not turn this file into a runbook.
 |---|---|
 | [`README.md`](README.md) | Packages, development, release overview |
 | [`docs/release/README.md`](docs/release/README.md) | Channels, branch model, index |
+| [`docs/release/branch-model.md`](docs/release/branch-model.md) | Which branch a change goes on (version-independent) |
 | [`docs/release/verify.md`](docs/release/verify.md) | Pre-release artifact gate |
 | [`docs/release/stable.md`](docs/release/stable.md) | Stable release from `main` |
 | [`docs/release/prerelease.md`](docs/release/prerelease.md) | `release/X.Y` lifecycle |

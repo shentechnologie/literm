@@ -61,6 +61,8 @@ Rules:
   changelog. Delete prerelease-only entries there if they should not appear in
   the stable notes.
 - Do not merge `main` into the release branch. Cherry-pick specific fixes.
+- Choose the base branch from [branch-model.md](branch-model.md): a change
+  required for this line goes here; a change for the next line goes on `main`.
 
 ## 4. Promote alpha → beta → rc
 
