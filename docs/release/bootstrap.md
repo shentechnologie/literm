@@ -20,23 +20,72 @@ Version selection with Changesets, starting from `0.1.0`:
 | `minor` | `0.2.0-alpha.0` | `0.2.0` |
 | `patch` | `0.1.1-alpha.0` | `0.1.1` |
 
-There is no Changesets-native way to produce `0.1.0-alpha.0` from `0.1.0`
-without manually resetting versions. Do not invent one during bootstrap; pick
-the target stable line and use the matching bump.
+### First alpha of the current version (`0.1.0-alpha.0`)
+
+Changesets cannot turn `0.1.0` into `0.1.0-alpha.0` with a bump. For the first
+literm alpha we deliberately use a `0.0.0` base **on the release branch only**,
+then apply a `minor` changeset:
+
+```bash
+git checkout -b release/0.1 main
+
+node - <<'NODE'
+const fs = require('fs');
+for (const p of [
+  'packages/terminal-core/package.json',
+  'packages/react-native-terminal/package.json',
+]) {
+  const j = JSON.parse(fs.readFileSync(p));
+  j.version = '0.0.0';
+  if (j.dependencies?.['@literm/terminal-core']) {
+    j.dependencies['@literm/terminal-core'] = '^0.0.0';
+  }
+  fs.writeFileSync(p, JSON.stringify(j, null, 2) + '\n');
+}
+NODE
+
+cat > .changeset/initial-alpha.md <<'EOF'
+---
+"@literm/terminal-core": minor
+"@literm/react-native-terminal": minor
+---
+
+First public alpha of the 0.1 line.
+EOF
+
+bun changeset pre enter alpha
+bun changeset version
+```
+
+Result: `0.1.0-alpha.0` for both packages, with
+`@literm/terminal-core: ^0.1.0-alpha.0`; the eventual stable is `0.1.0`.
+
+The `0.0.0` base is bootstrap-only. Never commit it to `main`; it exists only
+on `release/0.1` to make the first prerelease version expressible.
+
+For a later line (for example 0.2), do not reset to `0.0.0`; use the normal
+`minor` bump from `0.1.0`, which produces `0.2.0-alpha.0`.
 
 ## Steps (prerelease bootstrap)
 
 ```bash
 # on the release branch for the target line
-bun run release:verify
-
 bun changeset                 # describe the release; choose minor or patch
 bun changeset pre enter alpha
 bun changeset version         # e.g. 0.2.0-alpha.0
+bun run release:verify
+
+git add -A
+git commit -m "chore(release): cut 0.2.0-alpha.0"
 
 # publish both packages from this machine, with 2FA
 bun changeset publish
 ```
+
+Commit **before** `changeset publish`: the publish command tags the current
+commit, so an uncommitted version bump would put the tag on the wrong commit.
+For the first 0.1 alpha, use the `0.0.0` base section above instead of the
+generic `bun changeset` step.
 
 - The release gate already built both packages; `prepublishOnly` only verifies
   that `lib/` exists. `changeset publish` publishes with the `alpha` dist-tag
