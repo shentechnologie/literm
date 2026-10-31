@@ -119,6 +119,10 @@ This brings the version bump and changelogs back to `main`. Do not merge before
 the stable publish, and do not bring the release branch's `pre.json` along; it
 is already removed.
 
+Do **not** delete `release/X.Y`. It stays as the patch-support branch for the
+line. The only branch that may be deleted is the temporary
+`changeset-release/release/X.Y` branch created by the Version Packages PR.
+
 ## 7. Keep `main` gated
 
 While `release/0.2` is active, set the repository variable
