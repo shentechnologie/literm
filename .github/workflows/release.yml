@@ -4,6 +4,8 @@ name: Release
 # would ship 0.1.0 stable. Restore the push triggers immediately after the
 # first alpha publish (see docs/release/bootstrap.md).
 on:
+  push:
+    branches: [main, 'release/**']
   workflow_dispatch:
     inputs:
       dist_tag:
