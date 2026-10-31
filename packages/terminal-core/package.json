@@ -1,6 +1,6 @@
 {
   "name": "@literm/terminal-core",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "description": "Headless terminal core: xterm parser wrapper, shadow-grid diff, palette, key encoder, and the transport/drain contract for SSH shells.",
   "license": "MIT",
   "homepage": "https://github.com/shentechnologie/literm/tree/main/packages/terminal-core#readme",
