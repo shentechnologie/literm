@@ -41,6 +41,18 @@ release/0.1:     ● cut from the 0.1.0 tag ── 0.1.1 (latest until 0.2.0 shi
   Content changes only through stabilization fixes, version/changelog commits
   and cherry-picks. Never merge `main` into a release branch.
 
+## GitHub settings (one-time)
+
+- **Settings → Actions → General → Workflow permissions → Allow GitHub Actions
+  to create and approve pull requests.** `changesets/action` opens the Version
+  Packages PR; without this it fails with `GitHub Actions is not permitted to
+  create or approve pull requests`.
+- If the checkbox is disabled, the organization must allow it first under
+  **Organization Settings → Actions → General → Workflow permissions**.
+- Set the repository variable `ACTIVE_RELEASE=release/X.Y` while a release
+  branch is stabilizing a line, and clear it after the stable release is merged
+  back.
+
 ## Rules
 
 1. Run `bun run release:verify` before every publish. A failing gate blocks the
