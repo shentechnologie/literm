@@ -47,6 +47,9 @@ This is why a feature that is crucial for the final `X.Y.0` belongs on
 "Immutable" describes the branch's identity, not a freeze on all commits:
 
 - Never delete, force-push or rebase `release/X.Y`.
+- `release/X.Y` is kept after `X.Y.0` ships for `X.Y.z` patch support. The only
+  branch that may be deleted is the temporary `changeset-release/release/X.Y`
+  branch created by the Version Packages PR.
 - Content changes only through stabilization fixes, version/changelog commits and
   cherry-picks.
 - Never merge `main` into `release/X.Y`. Bring a specific fix over with
