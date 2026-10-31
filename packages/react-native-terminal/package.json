@@ -1,6 +1,6 @@
 {
   "name": "@literm/react-native-terminal",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "description": "React Native SSH terminal: the native secure-shell module, the Skia terminal view, and the terminal pane (key bar + input).",
   "license": "MIT",
   "homepage": "https://github.com/shentechnologie/literm/tree/main/packages/react-native-terminal#readme",
@@ -59,7 +59,7 @@
     "vendor": "scripts/vendor-ssh.sh"
   },
   "dependencies": {
-    "@literm/terminal-core": "^0.1.0-alpha.0"
+    "@literm/terminal-core": "^0.1.0-alpha.1"
   },
   "peerDependencies": {
     "@shopify/react-native-skia": "*",
