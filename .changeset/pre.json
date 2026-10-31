@@ -1,0 +1,11 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "@literm/react-native-terminal": "0.0.0",
+    "@literm/terminal-core": "0.0.0"
+  },
+  "changesets": [
+    "initial-alpha"
+  ]
+}
