@@ -40,14 +40,17 @@ packages/react-native-terminal/scripts/engine-smoke.sh   # real handshake, macOS
 
 ## Release
 
-Versioning and publishing are handled by [Changesets](https://github.com/changesets/changesets):
+Two packages, one version. Stable releases come from `main`; alpha/beta/rc
+stabilization runs on `release/X.Y` branches. Older supported lines are patched
+with a `vX.Y` dist-tag.
 
-1. `bun run changeset` — describe a change and pick the bump.
-2. Push to `main`; the Release workflow opens a **Version Packages** PR.
-3. Merge it; the workflow publishes to npm and tags the release.
+- Stable: `bun changeset` → push → merge the Version Packages PR.
+- Prerelease: cut `release/X.Y`, then follow the runbook.
+- Gate: `bun run release:verify` before every publish.
 
-`NPM_TOKEN` must be set as a repository secret (an npm automation token with
-publish rights for the `@literm` scope). Provenance is enabled in CI.
+The branch model, channel runbooks and support policy are in
+[`docs/release/`](docs/release/README.md). Trusted publishing (OIDC) is the only
+publish path; no npm token is stored in the repo.
 
 ## License
 

@@ -13,6 +13,9 @@ coverage/
 *.log
 .DS_Store
 
+# local gradle state (never ship in a package)
+.gradle/
+
 # local env
 .env
 .env.local

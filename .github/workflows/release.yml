@@ -1,13 +1,24 @@
 name: Release
 
+# Bootstrap window: the packages do not exist yet, so a push-triggered publish
+# would ship 0.1.0 stable. Restore the push triggers immediately after the
+# first alpha publish (see docs/release/bootstrap.md).
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dist_tag:
+        description: 'npm dist-tag for a maintenance release (blank = latest)'
+        required: false
+        default: ''
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
+    # While a release branch is stabilizing a line, main must not publish.
+    # Set the repository variable ACTIVE_RELEASE=release/X.Y and clear it after
+    # the stable release has been merged back.
+    if: ${{ github.ref != 'refs/heads/main' || vars.ACTIVE_RELEASE == '' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -20,16 +31,16 @@ jobs:
           bun-version: latest
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          registry-url: https://registry.npmjs.org
+          # Node 24 ships npm >= 11.5.1, required for OIDC trusted publishing.
+          # Do not set registry-url: it writes an empty NODE_AUTH_TOKEN that
+          # shadows OIDC.
+          node-version: 24.x
       - run: bun install --frozen-lockfile
       - run: bun run build
+      - run: bun run scripts/verify-release.ts
       - uses: changesets/action@v1
         with:
           version: bun run version
-          publish: bun run release
+          publish: ${{ github.event.inputs.dist_tag && format('bun run release -- --tag {0}', github.event.inputs.dist_tag) || 'bun run release' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true

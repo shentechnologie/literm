@@ -2,8 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'release/**']
   pull_request:
+    branches: [main, 'release/**']
 
 jobs:
   build:
@@ -14,8 +15,11 @@ jobs:
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
+      - name: Guard prerelease state
+        if: github.ref == 'refs/heads/main' || github.base_ref == 'main'
+        run: test ! -f .changeset/pre.json
       - run: bun run lint
       - run: bun run format:check
       - run: bun run typecheck
       - run: bun run test
-      - run: bun run build
+      - run: bun run release:verify

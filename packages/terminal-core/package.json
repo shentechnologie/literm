@@ -44,7 +44,8 @@
   ],
   "files": [
     "src",
-    "lib"
+    "lib",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "bob build",
@@ -64,7 +65,12 @@
     "source": "src",
     "output": "lib",
     "targets": [
-      "commonjs",
+      [
+        "commonjs",
+        {
+          "esm": true
+        }
+      ],
       [
         "module",
         {
