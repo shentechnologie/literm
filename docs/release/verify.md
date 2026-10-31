@@ -30,6 +30,10 @@ bun run release:verify
 
 Set `KEEP_VERIFY_TMP=1` to keep the packs for inspection.
 
+`prepublishOnly` is a presence check, not a rebuild. It fails if `lib/` is
+missing, because `changeset publish` runs packages concurrently and two
+concurrent `bob build` runs race on `terminal-core`'s type output.
+
 ## Required tarball contents
 
 `@literm/terminal-core`: `LICENSE`, `README.md`, `package.json`, both `lib/`

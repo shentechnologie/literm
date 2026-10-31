@@ -38,8 +38,10 @@ bun changeset version         # e.g. 0.2.0-alpha.0
 bun changeset publish
 ```
 
-- `changeset publish` builds through `prepublishOnly`, publishes with the
-  `alpha` dist-tag, and creates the package tags.
+- The release gate already built both packages; `prepublishOnly` only verifies
+  that `lib/` exists. `changeset publish` publishes with the `alpha` dist-tag
+  and creates the package tags.
+- If you skipped the gate, run `bun run build` before publishing.
 - npm will also attach `latest` to this first version because the package did
   not exist. That is unavoidable; the first stable release moves `latest`
   forward.

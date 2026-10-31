@@ -53,7 +53,7 @@
   ],
   "scripts": {
     "build": "bob build",
-    "prepublishOnly": "bob build",
+    "prepublishOnly": "node ../../scripts/check-built.mjs",
     "typecheck": "tsc --noEmit",
     "test": "bun test",
     "vendor": "scripts/vendor-ssh.sh"

@@ -35,6 +35,7 @@ Merge the Version Packages PR. The release publishes to `latest`.
 If you release from a terminal instead of CI:
 
 ```bash
+bun run build
 bun changeset version
 bun changeset publish
 git push --follow-tags
@@ -81,6 +82,7 @@ git add .changeset
 git commit -m "fix: ..."
 git push -u origin release/0.2
 
+bun run build
 bun changeset version
 bun changeset publish           # latest: 0.3 is not stable yet
 git push --follow-tags

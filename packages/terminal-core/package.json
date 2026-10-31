@@ -49,7 +49,7 @@
   ],
   "scripts": {
     "build": "bob build",
-    "prepublishOnly": "bob build",
+    "prepublishOnly": "node ../../scripts/check-built.mjs",
     "typecheck": "tsc --noEmit",
     "test": "bun test",
     "bench": "bun run bench/flood.ts"
